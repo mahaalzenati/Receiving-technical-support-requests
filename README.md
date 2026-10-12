@@ -29,7 +29,7 @@ Test the automation using the following scenarios:
 | Test Case – حالة الاختبار | Expected Result – النتيجة المتوقعة |
 |---|---|
 | Clear problem description – وصف واضح |  ملخص وتصنيف صحيحان |
-| Missing problem type – نوع المشكلة | مراجعة بشرية مفقود |
+| Missing problem type – نوع المشكلة مفقود | مراجعة بشري|
 | A problem where details regarding its impotrant are missing. – مشكلة مفقود فيها تفاصيل حول اهمينها |  مراجعة بشرية |
 
 
