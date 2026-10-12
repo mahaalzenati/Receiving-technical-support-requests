@@ -68,67 +68,10 @@
 - إشعار فريق الدعم الفني بالطلبات الكاملة لاتخاذ الاجراء المناسب.
 - إشعار فريق الدعم الفني بالطلبات التي تحتاج لمراجعة بشرية.
 
----
-
-## 3. Final Workflow Diagram – المخطط النهائي
-
-[Employee submits form]
-        |
-        v
-[Trigger: New form response]
-        |
-        v
-[Collect inputs]       
-        |
-        v
-[AI by Zapier: Classify and summarize]
-        |
-        v
-[Validate data]
-        |
-       
-        v
-[Apply routing rules]
-        |
-        valid output    +---- Invalid output ----> [Retry / Exception handling]
-                             |
-                             v
-                          [Human review]
-        |
-        v
-[Notify employee / Support team]
-
 
 ---
 
-## 4. AI vs Rules vs Human – توزيع المسؤوليات
-
-| Component – المكوّن | Responsibility – المسؤولية |
-|---|---|
-| AI by Zapier | Summarize and classify the reported issue – تلخيص المشكلة وتصنيفها |
-| Validation Rules | Check output format and allowed values – التحقق من صيغة المخرجات والقيم المسموح بها |
-| Routing Rules | Direct tickets to the correct queue – توجيه التذاكر إلى قائمة الدعم المناسبة |
-| Human Review | Handle ambiguity, conflicts, and exceptional cases – معالجة الغموض والتعارضات والحالات الاستثنائية |
-| Ticketing System | Store tickets and track their status – حفظ التذاكر وتتبع حالتها |
-| Logging | Record failures and processing history – تسجيل الأخطاء وسجل المعالجة |
-
----
-
-## 5. Implementation Checklist – قائمة التحقق قبل البناء
-
-- [ ] Define the form fields – تحديد حقول الفورم.
-- [ ] Finalize the AI prompt – اعتماد البرومبت النهائي.
-- [ ] Define the data schema – تحديد مخطط البيانات.
-- [ ] Define priority criteria with the IT team – اعتماد معايير الأولوية مع فريق الدعم.
-- [ ] Configure validation and routing rules – إعداد قواعد التحقق والتوجيه.
-- [ ] Define exception handling and retry limits – تحديد معالجة الاستثناءات وحدود إعادة المحاولة.
-- [ ] Connect the ticketing system – ربط نظام التذاكر.
-- [ ] Configure notifications – إعداد الإشعارات.
-- [ ] Test normal, incomplete, invalid, and high-risk requests – اختبار الطلبات العادية والناقصة وغير الصحيحة وعالية الخطورة.
-- [ ] Verify the end-to-end workflow before deployment – التحقق من سير العمل كاملًا قبل التشغيل الفعلي.
 
 ## 6. Expected Result – النتيجة المتوقعة
 
-A reliable IT support automation that receives employee requests, structures the data, validates AI outputs, routes tickets according to predefined rules, and sends exceptional cases for human review.
-
-نظام أتمتة موثوق للدعم الفني يستقبل طلبات الموظفين، وينظم البيانات، ويتحقق من مخرجات الذكاء الاصطناعي، ويوجّه التذاكر وفق قواعد محددة، ويحيل الحالات الاستثنائية إلى المراجعة البشرية.
+نظام أتمتة موثوق للدعم الفني يستقبل طلبات الموظفين، وينظم البيانات، ويتحقق من مخرجات الذكاء الاصطناعي، ويوجّه المشاكل وفق قواعد محددة، ويحيل الحالات الاستثنائية إلى المراجعة البشرية.
