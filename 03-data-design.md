@@ -1,50 +1,63 @@
-# IT Support Automation – CTCO Prompt Structure
+# IT Support Automation – أتمتة طلبات الدعم الفني
 
-## 1. Trigger
-- Employee submits an IT support request through a form.
-- The automation starts when a new form response is received.
+## 1. Trigger – المشغّل
 
-## 2. Inputs
-- `employee_name`
-- `employee_email`
-- `department`
-- `problem_description`
-- `submission_date`
+- يقوم الموظف بإرسال طلب دعم فني من خلال الفورم.
+- تبدأ الأتمتة تلقائيًا عند استلام طلب جديد من الفورم.
 
-## 3. Unstructured Data
-- `problem_description`
-- Free-text description of the technical issue reported by the employee.
-- May include symptoms, error messages, affected systems, and business impact.
+## 2. Inputs – المدخلات
+- `employee_name`: اسم الموظف
+- `employee_email`: البريد الإلكتروني للموظف
+- `problem`: وصف المشكلة الفنية
+تاريخ إرسال الطلب
 
-## 4. Structured Data
-- `problem_summary`
-- `problem_type`
-- `priority`
+## 3. Unstructured Data – البيانات غير المنظمة
+- `problem`: وصف المشكلة المكتوب بواسطة الموظف.
+- نص حر قد يتضمن غير كاملة او غير واضحة.
+- يجب على الذكاء الاصطناعي تحليل الوصف دون اختراع معلومات أو افتراض تفاصيل غير مذكورة.
 
-## 5. Data Schema
+## 4. Structured Data – البيانات المنظمة
+The AI extracts the following fields:
+يستخرج الذكاء الاصطناعي الحقول التالية:
 
-| Field | Data Type | Allowed Values |
+- `problem_summary`: ملخص واضح ومختصر للمشكلة.
+- `problem_type`: نوع المشكلة الفنية.
+- `important of the problem`: مستوى أهمية المشكلة.
+
+## 5. Data Schema – مخطط البيانات
+
+| Field – الحقل | Data Type – نوع البيانات | Description – الوصف |
 |---|---|---|
-| `problem_summary` | String / Null | Concise problem summary |
-| `problem_type` | String | `hardware`, `software`, `network`, `email`, `account_access`, `permissions`, `printer`, `security`, `other`, `unclear` |
-| `priority` | String | `critical`, `high`, `medium`, `low`, `needs_review` |
+| `problem_summary` | String / Null | ملخص المشكلة أو `null` إذا لم يتم وصف مشكلة فعلية |
+| `problem_type` | String | نوع المشكلة وفق التصنيفات المعتمدة |
+| `priority` | String | مستوى الأولوية بناءً على المعلومات المتاحة |
 
-## 6. Missing Information
-- Identify information that is missing, ambiguous, or insufficient to classify the issue reliably.
-- Never invent, assume, or guess missing information.
-- Do not infer the root cause of the problem.
-- Use `null` when the problem description is missing or no actual problem is described.
-- Use `unclear` when the problem type cannot be determined.
-- Use `needs_review` when there is insufficient evidence to assign a reliable priority.
+### Allowed Values – القيم المسموح بها
 
-## 7. Validation
-- Return only valid JSON.
-- Include exactly the three required output fields:
-  - `problem_summary`
-  - `problem_type`
-  - `priority`
-- Use only the allowed values defined in the data schema.
-- Ensure `problem_summary` contains only explicitly reported facts.
-- Never assign priority based on urgency wording alone.
-- Do not add explanations, Markdown, or extra fields to the JSON output.
-- Route ambiguous or high-risk cases for human review according to the company's support policy.
+**`problem_type` – نوع المشكلة**
+- `hardware` — مشاكل الأجهزة
+- `software` — مشاكل البرامج والتطبيقات
+- `network` — مشاكل الشبكة والاتصال
+- `email` — مشاكل البريد الإلكتروني
+- `account_access` — مشاكل تسجيل الدخول والوصول إلى الحسابات
+- `permissions` — مشاكل الصلاحيات
+- `printer` — مشاكل الطابعات
+- `security` — مشاكل أمن المعلومات
+- `other` — أنواع أخرى
+- `unclear` — نوع المشكلة غير واضح
+
+**`impotrant of the problem`
+- `high` — عالية
+- `medium` — متوسطة
+- `low` — منخفضة
+
+## 6. Missing Information – المعلومات الناقصة
+- تحديد المعلومات الناقصة أو الغامضة أو غير الكافية.
+- يمنع اختراع المعلومات الناقصة أو افتراضها أو تقديرها.
+- أعد `unclear` إذا تعذر تحديد نوع المشكلة.
+
+## 7. Validation – التحقق من صحة البيانات
+
+- يجب أن تتضمن النتيجة الحقول الثلاثة المطلوبة فقط.
+- استخدم القيم المسموح بها فقط وفق مخطط البيانات.
+- تأكد من أن الملخص يحتوي على المعلومات التي ذكرها الموظف صراحةً فقط..
